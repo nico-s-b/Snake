@@ -4,8 +4,6 @@
  */
 package Gusanito;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
@@ -15,22 +13,24 @@ import javax.swing.JFrame;
 public class Game extends JFrame{
     
     Paint paint;
+    Comida comida;
+    Snake snake;
     public static boolean gameOver = false;
-
+    
    public Game() {
         initializeGameObjects(); // Inicializa objetos relacionados con el juego
         startGameThread(); // Inicia el hilo del juego
     }
 
     private void initializeGameObjects() {
-        Comida comida = new Comida();
-        Snake snake = new Snake();
+        comida = new Comida();
+        snake = new Snake();
         paint = new Paint(comida, snake);
         Screen screen = new Screen(paint);
     }
 
     private void startGameThread() {
-        Momento momento = new Momento();
+        Momento momento = new Momento(comida, snake, paint);
         Thread trid = new Thread(momento);
         trid.start();
     }

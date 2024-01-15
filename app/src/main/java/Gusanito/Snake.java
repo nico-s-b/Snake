@@ -27,9 +27,30 @@ public class Snake {
         return this.listaPosiciones;
     }
     
+    public int getLarge(){
+        return this.listaPosiciones.size();
+    }
+    
     public int getPoints(){
         return this.listaPosiciones.size()-1;
     }
+
+    public int getX(){
+        return snake.x;
+    }    
+    
+    public void setX(int x){
+        snake.x = x;
+    }
+    
+    public int getY(){
+        return snake.y;
+    }  
+
+    public void setY(int y){
+        snake.y = y;
+    }
+    
     
 }
     

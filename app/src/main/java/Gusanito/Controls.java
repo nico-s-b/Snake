@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 
 public class Controls extends java.awt.event.KeyAdapter {
     
-    String direccion = "RIGHT";
+    public static String direccion = "RIGHT";
     
     @Override
     public void keyPressed(KeyEvent e) {
@@ -30,6 +30,7 @@ public class Controls extends java.awt.event.KeyAdapter {
                 }   break;
             case KeyEvent.VK_UP:
                 if(!"DOWN".equals(direccion)) {
+                    System.out.println("Arriba");
                     direccion = "UP";
                 }   break;
             case KeyEvent.VK_DOWN:
@@ -37,13 +38,16 @@ public class Controls extends java.awt.event.KeyAdapter {
                     direccion = "DOWN";
                 }   break;
             case KeyEvent.VK_N:
-                Gusanito.Game.gameOver = false;
-                Gusanito.Game();
+                Game.gameOver = false;
+                //StartNewGame();
                 break;
             default:
                 break;				
         }
     }
-
-	}
+    
+    public String getDireccion(){
+        return direccion;
+    }
+}
     
