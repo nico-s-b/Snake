@@ -22,37 +22,52 @@ public class Comida {
     public void generarComida() {
         Random rnd = new Random();
 
-        comida.x = (rnd.nextInt(Gusanito.Screen.width)) + 5;
-        if((comida.x % 5) > 0) {
-                comida.x = comida.x - (comida.x % 5);
-        }
+        comida.x = (rnd.nextInt(Gusanito.Screen.width) + Paint.widthPoint/2);
+        adjustComidaXposition();
 
-        if(comida.x < 5) {
-                comida.x = comida.x + 10;
+        comida.y = (rnd.nextInt(Gusanito.Screen.height)) + Paint.heightPoint/2;
+        adjustComidaYposition();
+    }
+    
+    private void adjustComidaXposition() {
+        if((comida.getX() % Paint.widthPoint) > 0) {
+                comida.x = comida.x - (comida.x % Paint.widthPoint/2);
         }
-        if(comida.x > Gusanito.Screen.width) {
-                comida.x = comida.x - 10;
+        if(comida.getX() < Paint.widthPoint/2) {
+                comida.x = comida.x + Paint.widthPoint;
         }
-
-        comida.y = (rnd.nextInt(Gusanito.Screen.height)) + 5;
-        if((comida.y % 5) > 0) {
-                comida.y = comida.y - (comida.y % 5);
+        if(comida.getX() > Gusanito.Screen.width) {
+                comida.x = comida.x - Paint.widthPoint;
+        }        
+    }
+    
+    private void adjustComidaYposition() {
+        if((comida.getY() % Paint.heightPoint/2) > 0) {
+                comida.y = comida.y - (comida.y % Paint.heightPoint/2);
         }	
 
-        if(comida.y > Gusanito.Screen.height) {
-                comida.y = comida.y - 10;
+        if(comida.getY() > Gusanito.Screen.height) {
+                comida.y = comida.y - Paint.heightPoint;
         }
-        if(comida.y < 0) {
-                comida.y = comida.y + 10;
-        }
+        if(comida.getY() < 0) {
+                comida.y = comida.y + Paint.heightPoint;
+        }        
     }
     
     public int getX(){
         return comida.x;
     }
     
+    public void setX(int x) {
+        comida.x = x;
+    }
+    
     public int getY(){
         return comida.y;
     }    
+
+    public void setY(int y) {
+        comida.y = y;
+    }
     
 }

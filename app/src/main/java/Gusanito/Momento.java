@@ -24,13 +24,26 @@ public class Momento extends Thread {
         this.paint = paint;
     }
 
+    @Override
+    public void run() {
+        while(true) {
+            if((java.lang.System.currentTimeMillis() - last) > frequency) {
+                if(!Game.gameOver) {
+                    snakeMovement();
+                }
+            actualizar();
+            last = java.lang.System.currentTimeMillis();
+            }
+        }
+    }    
+
     public void actualizar() {
         snakePositions();
         checkIfSnakeCollideWithItself();
         checkIfSnakeEatComida();
         paint.repaint();
     }
-
+    
     private void snakePositions(){
         snake.getPosiciones().add(0,new Point(snake.getX(),snake.getY()));
 	snake.getPosiciones().remove(snake.getLarge()-1);        
@@ -59,43 +72,30 @@ public class Momento extends Thread {
         return snakeEatComidaX && snakeEatComidaY;
     }
     
-    @Override
-    public void run() {
-        while(true) {
-            if((java.lang.System.currentTimeMillis() - last) > frequency) {
-                if(!Game.gameOver) {
-                    snakeMovement();
-                }
-            actualizar();
-            last = java.lang.System.currentTimeMillis();
-            }
-        }
-    }
-
     private void snakeMovement(){
         switch (Controls.direccion){
             case "RIGHT":
-                snake.setX(snake.getX() + paint.widthPoint);
+                snake.setX(snake.getX() + Paint.widthPoint);
                     if(snake.getX() > Screen.width) {
                        snake.setX(0);
                    }                           
                 break;
             case "LEFT":
-                snake.setX(snake.getX() - paint.widthPoint);
+                snake.setX(snake.getX() - Paint.widthPoint);
                 if(snake.getX() < 0) {
-                    snake.setX(Screen.width - paint.widthPoint);
+                    snake.setX(Screen.width - Paint.widthPoint);
                 }                            
                 break;
             case "UP":
-                snake.setY(snake.getY() - paint.heightPoint);
-                if(snake.getY() < paint.heightPoint) {
+                snake.setY(snake.getY() - Paint.heightPoint);
+                if(snake.getY() < Paint.heightPoint) {
                     snake.setY(Screen.height);
                 }                                   
                 break;
             case "DOWN":
-                snake.setY(snake.getY() + paint.heightPoint);
+                snake.setY(snake.getY() + Paint.heightPoint);
                 if(snake.getY() > Screen.height) {
-                    snake.setY(paint.heightPoint);
+                    snake.setY(Paint.heightPoint);
                 }                            
                 break;
         }

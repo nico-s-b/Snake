@@ -16,8 +16,8 @@ import javax.swing.JPanel;
  */
 public class Paint extends JPanel {
     
-    int widthPoint = 10;
-    int heightPoint = 10;
+    static int widthPoint = 10;
+    static int heightPoint = 10;
     
     private Comida comida;
     private Snake snake;
